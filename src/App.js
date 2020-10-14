@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense, lazy } from 'react';
+import  Header from './components/Header';
+import  ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
+const Comments = lazy(() => import('./components/Comments'));
+const Content = lazy(() => import('./components/Content'));
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ErrorBoundary>
+      <Header />
+      <Suspense fallback={<h1>Still loadingggggggggggggggggggggggggg</h1>}>
+        <Content />
+        <Comments />
+      </Suspense>
+    </ErrorBoundary>
     </div>
   );
 }
